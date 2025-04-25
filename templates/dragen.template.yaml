@@ -78,15 +78,15 @@ Mappings:
     AMI:
       DRAGEN: dragen-completesuite-*
     us-east-1:
-      DRAGEN: ami-03cbd53b0e88e058e
+      DRAGEN: ami-031e74a44cf78bbe0
     us-west-2:
       DRAGEN: ami-0fce520c7c6e5044d
     eu-central-1:
-      DRAGEN: ami-097ee7e6e7b6bbc0d
+      DRAGEN: ami-070807320b35acd1d
     eu-west-1:
-      DRAGEN: ami-03fa4250b37330bd1
+      DRAGEN: ami-0a3b1dcda746bd01d
     ap-southeast-2:
-      DRAGEN: ami-01df63237b437a659
+      DRAGEN: ami-058a6e883edcdf5ee
 
 Parameters:
   InstanceType:
@@ -111,13 +111,13 @@ Parameters:
     ConstraintDescription: Quick Start bucket name can include numbers, lowercase
       letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen
       (-).
-    Default: aws-ia
+    Default: illumina-dragen-solution-savbio
     Description: S3 bucket name for the Quick Start assets. Quick Start bucket name
       can include numbers, lowercase letters, uppercase letters, and hyphens (-).
       It cannot start or end with a hyphen (-).
     Type: String
   QSS3BucketRegion:
-    Default: 'us-east-1'
+    Default: 'us-west-2'
     Description: 'The AWS Region where the Quick Start S3 bucket (QSS3BucketName) is hosted. When using your own bucket, you must specify this value.'
     Type: String
   QSS3KeyPrefix:
@@ -127,7 +127,6 @@ Parameters:
     Description: S3 key prefix for the Quick Start assets. Quick Start key prefix
       can include numbers, lowercase letters, uppercase letters, hyphens (-), and
       forward slash (/).
-    Default: cfn-ps-illumina-dragen/
     Type: String
   KeyPairName:
     Description: The name of an existing public/private key pair, which allows you
@@ -167,7 +166,8 @@ Parameters:
     ConstraintDescription: S3 genomics bucket name can include numbers, lowercase
       letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen
       (-).
-    Description: S3 bucket name for the bucket to which you'll read and write genomics data. 
+    Description: S3 bucket name for the bucket to which you'll read and write genomics data.
+    Default: s3-svb-pipeline-test
     Type: String
 
 Rules:
