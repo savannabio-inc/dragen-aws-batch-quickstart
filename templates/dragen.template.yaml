@@ -111,7 +111,7 @@ Parameters:
     ConstraintDescription: Quick Start bucket name can include numbers, lowercase
       letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen
       (-).
-    Default: illumina-dragen-solution-savbio
+    Default: s3-svb-pipeline-dragen-deployment-high
     Description: S3 bucket name for the Quick Start assets. Quick Start bucket name
       can include numbers, lowercase letters, uppercase letters, and hyphens (-).
       It cannot start or end with a hyphen (-).

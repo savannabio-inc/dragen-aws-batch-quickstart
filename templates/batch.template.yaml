@@ -263,7 +263,7 @@ Resources:
   DragenComputeEnvironmentSpot:
     Type: AWS::Batch::ComputeEnvironment
     Properties:
-      ComputeEnvironmentName: dragen-spot
+      ComputeEnvironmentName: dragen-spot-high
       ServiceRole: !Ref BatchServiceRole
       Type: MANAGED
       State: ENABLED
@@ -286,7 +286,7 @@ Resources:
   DragenComputeEnvironmentOnDemand:
     Type: AWS::Batch::ComputeEnvironment
     Properties:
-      ComputeEnvironmentName: dragen-ondemand
+      ComputeEnvironmentName: dragen-ondemand-high
       ServiceRole: !Ref BatchServiceRole
       Type: MANAGED
       State: ENABLED
@@ -341,7 +341,7 @@ Resources:
   DragenJobQueue:
     Type: AWS::Batch::JobQueue
     Properties:
-      JobQueueName: dragen-queue
+      JobQueueName: dragen-queue-high
       Priority: 100
       State: ENABLED
       ComputeEnvironmentOrder:
@@ -352,7 +352,7 @@ Resources:
   DragenJobDefinition:
     Type: AWS::Batch::JobDefinition
     Properties:
-      JobDefinitionName: dragen
+      JobDefinitionName: dragen-high
       Type: container
       RetryStrategy:
         Attempts: !Ref RetryNumber
