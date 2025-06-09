@@ -666,27 +666,44 @@ class DragenJob(object):
     #    Nothing if success
     def upload_job_outputs(self):
         if not self.output_s3_url:
-            printf('Error: Output S3 location not specified!')
+            printf('Error: Output location not specified!')
             return
 
-        # Generate the command to upload the results
-        s3_valid, s3_bucket, s3_key = get_s3_bucket_key(self.output_s3_url)
+        # Check if output location is S3
+        if self.output_s3_url.startswith("s3://"):
+            # If it is:
+            # Generate the command to upload the results
+            s3_valid, s3_bucket, s3_key = get_s3_bucket_key(self.output_s3_url)
 
-        if not s3_valid or not s3_key or not s3_bucket:
-            printf('Error: could not get S3 bucket and key info from specified URL %s' % self.output_s3_url)
-            sys.exit(1)
+            if not s3_valid or not s3_key or not s3_bucket:
+                printf('Error: could not get S3 bucket and key info from specified URL %s' % self.output_s3_url)
+                sys.exit(1)
 
-        ul_cmd = '{bin} --mode upload --bucket {bucket} --key {key} --path {file} -s'.format(
-            bin=self.D_HAUL_UTIL,
-            bucket=s3_bucket,
-            key=s3_key,
-            file=self.output_dir.rstrip('/'))
+            ul_cmd = '{bin} --mode upload --bucket {bucket} --key {key} --path {file} -s'.format(
+                bin=self.D_HAUL_UTIL,
+                bucket=s3_bucket,
+                key=s3_key,
+                file=self.output_dir.rstrip('/'))
 
-        exit_code = exec_cmd(ul_cmd)
+            exit_code = exec_cmd(ul_cmd)
 
-        if exit_code:
-            printf('Error: Failure uploading outputs. Exiting with code %d' % exit_code)
-            sys.exit(exit_code)
+            if exit_code:
+                printf('Error: Failure uploading outputs. Exiting with code %d' % exit_code)
+                sys.exit(exit_code)
+        else:
+            # If it isn't:
+            # Move files from the output_dir to the desired output location
+            # shutil.copytree(self.output_dir.rstrip('/'), self.output_s3_url.rstrip('/'))
+            ul_cmd = '{bin}({sourceDir}, {destDir})'.format(
+                bin='shutil.copytree',
+                sourceDir=self.output_dir.rstrip('/'),
+                destDir=self.output_s3_url.rstrip('/'))
+            
+            exit_code = exec_cmd(ul_cmd)
+
+            if exit_code:
+                printf('Error: Failure copying outputs to FSx. Exiting with code %d' % exit_code)
+                sys.exit(exit_code)
 
         return
 
