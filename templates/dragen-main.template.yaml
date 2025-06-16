@@ -85,7 +85,7 @@ Parameters:
     AllowedValues:
     - f1.2xlarge
     - f1.4xlarge
-    - f1.16xlarge
+    - f2.6xlarge
     Default: f1.4xlarge
     Description: Amazon EC2 instance type for DRAGEN in the AWS Batch Compute Environment.
     Type: String
@@ -249,7 +249,5 @@ Outputs:
     Value: !GetAtt DragenStack.Outputs.DragenJobDefinition
   JobQueue:
     Value: !GetAtt DragenStack.Outputs.JobQueue
-  DragenComputeEnvironmentSpot:
-    Value: !GetAtt DragenStack.Outputs.DragenComputeEnvironmentSpot
   DragenComputeEnvironmentOnDemand:
     Value: !GetAtt DragenStack.Outputs.DragenComputeEnvironmentOnDemand

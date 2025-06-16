@@ -104,7 +104,7 @@ Parameters:
     AllowedValues:
     - f1.2xlarge
     - f1.4xlarge
-    - f1.16xlarge
+    - f2.6xlarge
     Description: Amazon EC2 instance type for DRAGEN in the AWS Batch Compute Environment.
     Type: String
 
@@ -271,29 +271,6 @@ Resources:
               qs_retry_command 10 docker run --name ecs-agent --detach=true --restart=on-failure:10 --volume=/var/run:/var/run --volume=/var/log/ecs/:/log --volume=/var/lib/ecs/data:/data --volume=/etc/ecs:/etc/ecs --net=host --env-file=/etc/ecs/ecs.config amazon/amazon-ecs-agent:latest
 
               --==BOUNDARY==--
-  DragenComputeEnvironmentSpot:
-    Type: AWS::Batch::ComputeEnvironment
-    Properties:
-      ComputeEnvironmentName: dragen-spot-high
-      ServiceRole: !Ref BatchServiceRole
-      Type: MANAGED
-      State: ENABLED
-      ComputeResources:
-        BidPercentage: !Ref BidPercentage
-        Ec2KeyPair: !Ref Ec2KeyPair
-        ImageId: !Ref ImageId
-        InstanceRole: !Ref DragenInstanceRole
-        InstanceTypes: [!Ref InstanceType]
-        MinvCpus: !Ref MinvCpus
-        DesiredvCpus: !Ref DesiredvCpus
-        MaxvCpus: !Ref MaxvCpus
-        SecurityGroupIds:
-        - !Ref BatchSecurityGroup
-        SpotIamFleetRole: !Ref SpotFleetRole
-        Subnets: !Ref SubnetIds
-        Type: SPOT
-        LaunchTemplate:
-          LaunchTemplateId: !Ref DragenLaunchTemplate
   DragenComputeEnvironmentOnDemand:
     Type: AWS::Batch::ComputeEnvironment
     Properties:
@@ -358,8 +335,6 @@ Resources:
       ComputeEnvironmentOrder:
         - Order: 1
           ComputeEnvironment: !Ref DragenComputeEnvironmentOnDemand
-        - Order: 2
-          ComputeEnvironment: !Ref DragenComputeEnvironmentSpot
   DragenJobDefinition:
     Type: AWS::Batch::JobDefinition
     Properties:
@@ -406,8 +381,6 @@ Resources:
               SourcePath: "/usr/lib64/libdragen.so.4.3.13"
 
 Outputs:
-  DragenComputeEnvironmentSpot:
-    Value: !Ref DragenComputeEnvironmentSpot
   DragenComputeEnvironmentOnDemand:
     Value: !Ref DragenComputeEnvironmentOnDemand
   JobQueue:
