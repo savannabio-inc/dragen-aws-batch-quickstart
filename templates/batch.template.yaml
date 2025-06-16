@@ -201,6 +201,8 @@ Resources:
               --==BOUNDARY==
               Content-Type: text/cloud-boothook; charset="us-ascii"
 
+              #!/bin/bash
+              
               file_system_id=fs-0c1e8b984b10ce95e
               region=us-west-2
               fsx_directory=/scratch
