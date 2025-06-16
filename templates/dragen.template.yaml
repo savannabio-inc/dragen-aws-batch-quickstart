@@ -60,8 +60,6 @@ Metadata:
         default: Quick Start S3 Bucket Name
       InstanceType:
         default: Instance Type
-      BidPercentage:
-        default: Spot Bid Percentage
       RetryNumber:
         default: AWS Batch Retry Number
       MinvCpus:
@@ -132,12 +130,6 @@ Parameters:
     Description: The name of an existing public/private key pair, which allows you
       to securely connect to your instance after it launches
     Type: AWS::EC2::KeyPair::KeyName
-  BidPercentage:
-    AllowedPattern: (?:\b|-)([1-9]{1,2}[0]?|100)\b
-    ConstraintDescription: Spot Bid Percentage should be between 1 and 100, inclusive
-    Description: The bid percentage set for your AWS Batch Managed Compute Environment with Spot Instances.
-    Default: 50
-    Type: String
   RetryNumber:
     AllowedPattern: (?:\b|-)([1-9]|10)\b
     ConstraintDescription: AWS Batch job retry number should be between 1 and 10

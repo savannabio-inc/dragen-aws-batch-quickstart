@@ -63,8 +63,6 @@ Metadata:
         default: Quick Start S3 Bucket Name
       InstanceType:
         default: Instance Type
-      BidPercentage:
-        default: Spot Bid Percentage
       RetryNumber:
         default: AWS Batch Retry Number
       MinvCpus:
@@ -145,12 +143,6 @@ Parameters:
       can include numbers, lowercase letters, uppercase letters, hyphens (-), and
       forward slash (/).
     Default: cfn-ps-illumina-dragen/
-    Type: String
-  BidPercentage:
-    AllowedPattern: (?:\b|-)([1-9]{1,2}[0]?|100)\b
-    ConstraintDescription: Spot Bid Percentage should be between 1 and 100, inclusive
-    Description: The bid percentage set for your AWS Batch Managed Compute Environment with Spot Instances.
-    Default: 50
     Type: String
   RetryNumber:
     AllowedPattern: (?:\b|-)([1-9]|10)\b

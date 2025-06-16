@@ -41,8 +41,6 @@ Metadata:
         default: Key Pair
       InstanceType:
         default: Instance Type
-      BidPercentage:
-        default: Spot Bid Percentage
       MinvCpus:
         default: Min vCPUs
       MaxvCpus:
@@ -68,11 +66,6 @@ Parameters:
   SubnetIds:
     Type: List<AWS::EC2::Subnet::Id>
     Description: Subnets you want your batch compute environment to launch in. Must be private subnets and in the VPC specified by VpcId.
-  BidPercentage:
-    AllowedPattern: (?:\b|-)([1-9]{1,2}[0]?|100)\b
-    ConstraintDescription: Spot Bid Percentage should be between 1 and 100, inclusive
-    Description: The bid percentage set for your AWS Batch Managed Compute Environment with Spot Instances.
-    Type: String
   ImageId:
     Type: AWS::EC2::Image::Id
     Description: AMI you want your AWS Batch Managed Compute Environment to use
@@ -138,20 +131,6 @@ Resources:
               - "sts:AssumeRole"
       ManagedPolicyArns:
       - !Sub arn:${AWS::Partition}:iam::aws:policy/service-role/AWSBatchServiceRole
-  SpotFleetRole:
-    Type: AWS::IAM::Role
-    Properties:
-      AssumeRolePolicyDocument:
-        Version: 2012-10-17
-        Statement:
-          - Effect: Allow
-            Principal:
-              Service:
-                - "spotfleet.amazonaws.com"
-            Action:
-              - "sts:AssumeRole"
-      ManagedPolicyArns:
-      - !Sub "arn:${AWS::Partition}:iam::aws:policy/service-role/AmazonEC2SpotFleetTaggingRole"
   S3ReadWritePolicyInstance:
     Type: AWS::IAM::Policy
     Properties:
