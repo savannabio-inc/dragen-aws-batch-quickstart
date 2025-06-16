@@ -204,7 +204,7 @@ Resources:
               #!/bin/bash
 
               amazon-linux-extras install -y lustre2.10
-              mkdir -p ${fsx_directory}
+              mkdir -p /scratch
               mount -t lustre -o noatime,flock fs-0c1e8b984b10ce95e.fsx.us-west-2.amazonaws.com@tcp:/w53qtb4v /scratch
 
               --==BOUNDARY==
