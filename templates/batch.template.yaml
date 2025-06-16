@@ -133,7 +133,7 @@ Resources:
   S3ReadWritePolicyInstance:
     Type: AWS::IAM::Policy
     Properties:
-      PolicyName: S3ReadWritePolicyInstance
+      PolicyName: S3ReadWritePolicyInstance-v2
       PolicyDocument:
         Version: 2012-10-17
         Statement:
@@ -156,7 +156,7 @@ Resources:
   S3ReadWritePolicyJob:
     Type: AWS::IAM::Policy
     Properties:
-      PolicyName: S3ReadWritePolicyJob
+      PolicyName: S3ReadWritePolicyJob-v2
       PolicyDocument:
         Version: 2012-10-17
         Statement:
@@ -192,7 +192,7 @@ Resources:
             ResourceType: 'instance'
             Tags:
               - Key: "Name"
-                Value: "Dragen"
+                Value: "Dragen-v2"
         UserData: !Base64
           Fn::Sub: |
               Content-Type: multipart/mixed; boundary="==BOUNDARY=="
@@ -250,7 +250,7 @@ Resources:
   DragenComputeEnvironmentOnDemand:
     Type: AWS::Batch::ComputeEnvironment
     Properties:
-      ComputeEnvironmentName: dragen-ondemand-high
+      ComputeEnvironmentName: dragen-ondemand-v2
       ServiceRole: !Ref BatchServiceRole
       Type: MANAGED
       State: ENABLED
@@ -305,7 +305,7 @@ Resources:
   DragenJobQueue:
     Type: AWS::Batch::JobQueue
     Properties:
-      JobQueueName: dragen-queue-high
+      JobQueueName: dragen-queue-v2
       Priority: 100
       State: ENABLED
       ComputeEnvironmentOrder:
@@ -314,7 +314,7 @@ Resources:
   DragenJobDefinition:
     Type: AWS::Batch::JobDefinition
     Properties:
-      JobDefinitionName: dragen-high
+      JobDefinitionName: dragen-definition-v2
       Type: container
       RetryStrategy:
         Attempts: !Ref RetryNumber
