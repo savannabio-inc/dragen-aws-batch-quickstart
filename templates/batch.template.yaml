@@ -16,7 +16,6 @@ Metadata:
         Parameters:
         - VpcId
         - SubnetIds
-        - BidPercentage
         - ImageId
         - Ec2KeyPair
         - MinvCpus

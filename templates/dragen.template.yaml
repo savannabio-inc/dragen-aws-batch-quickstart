@@ -31,7 +31,6 @@ Metadata:
       Parameters:
       - KeyPairName
       - InstanceType
-      - BidPercentage
       - MinvCpus
       - MaxvCpus
       - DesiredvCpus
@@ -262,7 +261,6 @@ Resources:
         DragenDockerImage: !Sub ${AWS::AccountId}.dkr.ecr.${AWS::Region}.amazonaws.com/${DockerBucketRepository.Outputs.Repository}:dragen
         VpcId: !Ref VPCID
         SubnetIds: !Sub "${PrivateSubnet1ID}, ${PrivateSubnet2ID}"
-        BidPercentage: !Ref BidPercentage
         InstanceType: !Ref InstanceType
         ImageId: !FindInMap [ AWSAMIRegionMap, !Ref "AWS::Region", DRAGEN ]
         Ec2KeyPair: !Ref KeyPairName

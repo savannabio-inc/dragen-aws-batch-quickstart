@@ -28,7 +28,6 @@ Metadata:
       Parameters:
       - KeyPairName
       - InstanceType
-      - BidPercentage
       - MinvCpus
       - MaxvCpus
       - DesiredvCpus
@@ -229,7 +228,6 @@ Resources:
         QSS3KeyPrefix: !Ref QSS3KeyPrefix
         KeyPairName: !Ref KeyPairName
         InstanceType: !Ref InstanceType
-        BidPercentage: !Ref BidPercentage
         MinvCpus: !Ref MinvCpus
         MaxvCpus: !Ref MaxvCpus
         DesiredvCpus: !Ref DesiredvCpus

@@ -40,10 +40,6 @@
         "ParameterValue": "$[taskcat_autobucket]"
     },
     {
-        "ParameterKey": "BidPercentage",
-        "ParameterValue": "50"
-    },
-    {
         "ParameterKey": "InstanceType",
         "ParameterValue": "f1.2xlarge"
     },
